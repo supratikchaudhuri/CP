@@ -1,69 +1,22 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+#define BOOST ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL); cerr.tie(NULL);
 #define ll long long
 
 void solve() {
-    int n; cin >> n;
-    vector<int> arr(n);
-    for(int i = 0; i < n; i++) {
-        cin >> arr[i];
+    ll res = 0;
+    long long a, b; cin >> a >> b;
+    for(int i = 1; i < a; i++) {
+        for(int j = 1; j < i; j++)
+            if(i/j == i%j)
+                res++;
     }
-
-    priority_queue<int> odds, evens;
-    for(int i : arr) {
-        if(i & 1)
-            odds.push(i);
-        else
-            evens.push(i);
-    }
-
-    ll alice = 0, bob = 0;
-    int f = 1;
-    while(!odds.empty() && !evens.empty()) {
-        if(f) {
-            if(alice + evens.top() >= bob + odds.top()) {
-                alice += evens.top(); evens.pop();
-            }
-            else{
-                odds.pop();
-            }
-        }
-        else {
-            if(alice + evens.top() <= bob + odds.top()) {
-                bob += odds.top(); odds.pop();
-            }
-            else{
-                evens.pop();
-            }
-        }
-        f = !f;
-    }
-
-    while(!odds.empty()) {
-        if(!f) 
-            bob += odds.top();
-
-        odds.pop();
-        f = !f;
-    }
-    while(!evens.empty()) {
-        if(f) 
-            alice += evens.top();
-
-        evens.pop();
-        f = !f;
-    }
-
-    if(alice > bob)
-        cout<< "Alice"<<endl;
-    else if (alice == bob)
-        cout<<"Tie"<<endl;
-    else
-        cout<<"Bob"<<endl;    
+    cout<<res<<endl;;
 }
 
 int main() {
+    BOOST;
     int t; cin >> t;
     while(t--) {
         solve();

@@ -4,31 +4,26 @@ using namespace std;
  
 #define ll long long
  
-void solve(){
-    int n; cin >> n;
-    vector<int> arr(n);
-    for(int i = 0; i < n; i++)
-        cin >> arr[i];
-    
+void solve() {
+   int n; cin >> n;
+   vector<int> arr(n);
+   for(int i = 0; i < n; i++)
+      cin >> arr[i];
  
-    sort(arr.begin(), arr.end());
+   vector<ll> dp(n);
+   dp[0] = arr[0];
  
-    ll a = 0, b = 0;
-    for(int i = n-1; i >= 0; i--) {
-        if(a < b)
-            a += arr[i];
-        else
-            b += arr[i];    
-    }
-    if(a == b)
-        cout<<"YES"<<endl;
-    else
-        cout<<"NO"<<endl;
-    
+   for(int i = 0; i < n; i++) {
+      if(i + arr[i] < n)
+         dp[i+arr[i]] = max(dp[i+arr[i]], max(dp[i], (ll)arr[i]) + arr[i+arr[i]]);
+      if(i > 0)
+         dp[i] = max(dp[i], max((ll)arr[i], dp[i-1]));
+   }
+   cout<<dp[n-1]<<endl;
 }
  
 int main() {
-    int t; cin >> t;
+   int t; cin >> t;
     while(t--) {
         solve();
     }

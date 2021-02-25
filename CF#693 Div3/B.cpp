@@ -1,4 +1,5 @@
 // 1472B - Fair Division
+//this works cuz candies wiegh either 1 or 2 gram
 #include<bits/stdc++.h>
 using namespace std;
  

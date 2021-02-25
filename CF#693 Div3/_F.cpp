@@ -7,11 +7,14 @@ void solve() {
   int n, m;
   cin >> n >> m;
   map<int, int> v;
+
   for (int i = 0; i < m; i++) {
     int x, y;
     cin >> x >> y;
     v[y] |= (1 << (x - 1));
   }
+
+
   const int FULL = 3;
   v[2e9] = FULL;
   int hasLast = 0, lastColor = 0;
